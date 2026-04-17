@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Laila Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="about-page show-header">
+  <header class="site-header" id="siteHeader">
+    <div class="global-brand">
+      <img
+        src="assets/mainnamedarkpurple.png"
+        alt="Laila"
+        class="global-brand-logo"
+      />
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="about-main">
+    <section class="about-hero">
+      <div class="about-copy-panel" id="aboutCopyPanel">
+        <p class="about-panel-label" id="aboutPanelLabel">ABOUT</p>
+        <h1 class="about-panel-title" id="aboutPanelTitle">
+          Tap or hover over a frame to learn more.
+        </h1>
+        <p class="about-panel-text" id="aboutPanelText">
+          Each image highlights a different part of my life, background, interests,
+          experiences, and creative perspective.
+        </p>
+      </div>
+
+      <div class="about-scene">
+        <div class="about-scene-track">
+          <img
+            src="assets/pictures.png"
+            alt="Picture frame wall"
+            class="about-scene-image"
+          />
+
+          <button
+            class="frame-hotspot frame-one"
+            data-label="BIO"
+            data-title="Who I am"
+            data-text="This frame introduces who I am as a creative, student, and person. It can speak to my personality, values, and what drives my work."
+            aria-label="Bio"
+            type="button"
+          >
+            <span class="sr-only">Bio</span>
+          </button>
+
+          <button
+            class="frame-hotspot frame-two"
+            data-label="BACKGROUND"
+            data-title="My story"
+            data-text="This frame reflects where I come from and the experiences that shaped me. It can represent personal growth, memories, and the foundation behind my perspective."
+            aria-label="Background"
+            type="button"
+          >
+            <span class="sr-only">Background</span>
+          </button>
+
+          <button
+            class="frame-hotspot frame-three"
+            data-label="EXPERIENCE"
+            data-title="What I do"
+            data-text="This image can highlight my experience across advertising, design, strategy, and storytelling. It shows the type of work I enjoy creating and building."
+            aria-label="Experience"
+            type="button"
+          >
+            <span class="sr-only">Experience</span>
+          </button>
+
+          <button
+            class="frame-hotspot frame-four"
+            data-label="COMMUNITY"
+            data-title="What matters to me"
+            data-text="This frame can speak to the people, teams, and communities that shape how I collaborate and create. It represents connection, support, and shared experiences."
+            aria-label="Community"
+            type="button"
+          >
+            <span class="sr-only">Community</span>
+          </button>
+
+          <button
+            class="frame-hotspot frame-five"
+            data-label="INSPIRATION"
+            data-title="What inspires me"
+            data-text="This image represents the visuals, culture, spaces, and aesthetics that inspire my creative direction. It can connect to art, design, fashion, media, and mood."
+            aria-label="Inspiration"
+            type="button"
+          >
+            <span class="sr-only">Inspiration</span>
+          </button>
+
+          <button
+            class="frame-hotspot frame-six"
+            data-label="FUTURE"
+            data-title="Where I’m headed"
+            data-text="This frame can represent where I want to grow next and the kind of work I hope to make in the future. It points toward my goals, direction, and next chapter."
+            aria-label="Future"
+            type="button"
+          >
+            <span class="sr-only">Future</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-dock-wrap">
+    <div class="dock-popout" id="dockPopout">
+      <div class="dock-popout-inner" id="dockPopoutInner"></div>
+    </div>
+
+    <div class="bottom-dock">
+      <button class="dock-btn" id="socialBtn" aria-label="Socials" type="button">
+        <span class="icon info-icon">i</span>
+      </button>
+
+      <button class="dock-btn" id="notebookBtn" aria-label="Notebook" type="button">
+        <span class="icon notebook-icon"></span>
+      </button>
+
+      <button class="dock-btn" id="prevPageBtn" aria-label="Previous page" type="button">
+        <span class="icon chevron left"></span>
+      </button>
+
+      <button class="dock-btn" id="nextPageBtn" aria-label="Next page" type="button">
+        <span class="icon chevron right"></span>
+      </button>
+    </div>
+  </div>
+
+  <script src="about.js"></script>
+</body>
+</html>

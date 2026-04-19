@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>More Projects | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+    
+  <header class="site-header project-site-header more-projects-header">
+    <div class="global-brand">
+      <a href="index.html">
+        <img
+          src="assets/mainnamedarkpurple.png"
+          alt="Laila"
+          class="global-brand-logo"
+        />
+      </a>
+    </div>
+
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="more-projects-page">
+
+    <div class="twinkle-stars" aria-hidden="true">
+        <img src="../assets/star1.png" alt="" class="twinkle-star star-a" />
+        <img src="../assets/star2.png" alt="" class="twinkle-star star-b" />
+        <img src="../assets/star3.png" alt="" class="twinkle-star star-c" />
+        <img src="../assets/star4.png" alt="" class="twinkle-star star-d" />
+        <img src="../assets/star1.png" alt="" class="twinkle-star star-e" />
+        <img src="../assets/star2.png" alt="" class="twinkle-star star-f" />
+        <img src="../assets/star3.png" alt="" class="twinkle-star star-g" />
+        <img src="../assets/star4.png" alt="" class="twinkle-star star-h" />
+    </div>
+
+    <section class="more-projects-hero">
+      <div class="more-projects-hero-inner">
+        <p class="more-projects-label">Additional Work</p>
+        <h1>More Projects</h1>
+        <p class="more-projects-intro">
+          A selection of additional work across web design, editorial design,
+          and brand strategy that shape my interests in the design space.
+        </p>
+      </div>
+    </section>
+
+    <section class="file-grid-section">
+      <div class="file-grid">
+
+        <a href="#" class="file-card">
+          <div class="file-thumb">
+            <img src="assets/artandthecity-cover.jpg" alt="Art and the City website preview" />
+          </div>
+          <div class="file-meta">
+            <p class="file-type">Web Design</p>
+            <h2>Art and the City</h2>
+            <p class="file-desc">
+              A final website project from my <i>Web Design</i> class at the University of Wisconsin-Milwaukee which explored art, culture, and city life through immersive digital storytelling.
+            </p>
+          </div>
+        </a>
+
+        <a href="#" class="file-card">
+          <div class="file-thumb">
+            <img src="assets/smithsonian-cover.jpg" alt="Smithsonian museum poster and brochure preview" />
+          </div>
+          <div class="file-meta">
+            <p class="file-type">Editorial Design</p>
+            <h2>Smithsonian Museum</h2>
+            <p class="file-desc">
+              Poster and brochure mockups designed to create a refined gallery identity and exhibition presence. Created in my <i>Introduction to Design</i> class at the University of Wisconsin-Milwaukee.
+            </p>
+          </div>
+        </a>
+
+        <a href="#" class="file-card">
+          <div class="file-thumb">
+            <img src="assets/blendedbond-cover.jpg" alt="Blended Bond capstone project preview" />
+          </div>
+          <div class="file-meta">
+            <p class="file-type">Capstone / Strategy</p>
+            <h2>Blended Bond</h2>
+            <p class="file-desc">
+              Senior capstone work where I led planning and served as account lead across two separate teams for the brand Blended Bond.
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </main>
+  <div class="bottom-dock-wrap projects-dock-wrap">
+  <div class="dock-popout" id="projectsDockPopout">
+    <div class="dock-popout-inner" id="projectsDockPopoutInner"></div>
+  </div>
+
+  <div class="bottom-dock projects-dock">
+    <button class="dock-btn" id="projectsSocialBtn" aria-label="Socials">
+      <span class="icon info-icon">i</span>
+    </button>
+
+    <button class="dock-btn" id="projectsNotebookBtn" aria-label="Media">
+      <span class="icon notebook-icon"></span>
+    </button>
+
+    <button class="dock-btn" id="projectsPrevPageBtn" aria-label="Previous page">
+      <span class="icon chevron left"></span>
+    </button>
+
+    <button class="dock-btn is-disabled" id="projectsNextPageBtn" aria-label="Next page">
+        <span class="icon chevron right"></span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const projectsSocialBtn = document.getElementById("projectsSocialBtn");
+  const projectsNotebookBtn = document.getElementById("projectsNotebookBtn");
+  const projectsPrevPageBtn = document.getElementById("projectsPrevPageBtn");
+  const projectsNextPageBtn = document.getElementById("projectsNextPageBtn");
+  const projectsDockPopout = document.getElementById("projectsDockPopout");
+  const projectsDockPopoutInner = document.getElementById("projectsDockPopoutInner");
+
+  function projectsNavigateWithSlide(url, direction = "left") {
+    document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
+    document.body.classList.add(
+      direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
+    );
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 350);
+  }
+
+  function closeProjectsDockPopout() {
+    projectsDockPopout.classList.remove("active");
+    projectsDockPopoutInner.innerHTML = "";
+  }
+
+  function openProjectsSocialPopout() {
+    projectsDockPopoutInner.innerHTML = `
+      <div class="popout-socials">
+        <a href="https://instagram.com/artxxlai" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="Instagram">
+          <img src="../assets/logo1.png" alt="Instagram" />
+        </a>
+        <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+          <img src="../assets/logo2.png" alt="LinkedIn" />
+        </a>
+      </div>
+    `;
+    projectsDockPopout.classList.add("active");
+  }
+
+  function openProjectsNotebookPopout() {
+    projectsDockPopoutInner.innerHTML = `
+      <div class="popout-note">
+        <div class="popout-note-label">MEDIA</div>
+        <div class="popout-note-title">More from this archive</div>
+        <div class="popout-note-text">
+          Additional design work spanning web, print, branding, and strategy-focused creative.
+        </div>
+      </div>
+    `;
+    projectsDockPopout.classList.add("active");
+  }
+
+  projectsSocialBtn?.addEventListener("click", () => {
+    const isOpen =
+      projectsDockPopout.classList.contains("active") &&
+      projectsDockPopoutInner.innerHTML.includes("popout-socials");
+
+    if (isOpen) {
+      closeProjectsDockPopout();
+    } else {
+      openProjectsSocialPopout();
+    }
+  });
+
+  projectsNotebookBtn?.addEventListener("click", () => {
+    const isOpen =
+      projectsDockPopout.classList.contains("active") &&
+      projectsDockPopoutInner.innerHTML.includes("popout-note");
+
+    if (isOpen) {
+      closeProjectsDockPopout();
+    } else {
+      openProjectsNotebookPopout();
+    }
+  });
+
+  projectsPrevPageBtn?.addEventListener("click", () => {
+    closeProjectsDockPopout();
+    projectsNavigateWithSlide("../index.html", "right");
+  });
+
+  document.addEventListener("click", (event) => {
+    const clickedInsideDock = event.target.closest(".projects-dock-wrap");
+    if (!clickedInsideDock) {
+      closeProjectsDockPopout();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeProjectsDockPopout();
+    }
+  });
+</script>
+
+</body>
+</html>

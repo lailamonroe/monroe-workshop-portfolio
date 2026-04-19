@@ -12,8 +12,6 @@ const cycleLogos = Array.from(document.querySelectorAll(".cycle-logo"));
 const stars = Array.from(document.querySelectorAll(".star"));
 const sceneTrack = document.getElementById("sceneTrack");
 
-const hotspots = document.querySelectorAll(".hotspot");
-
 const socialBtn = document.getElementById("socialBtn");
 const notebookBtn = document.getElementById("notebookBtn");
 const prevPageBtn = document.getElementById("prevPageBtn");
@@ -21,6 +19,8 @@ const nextPageBtn = document.getElementById("nextPageBtn");
 
 const dockPopout = document.getElementById("dockPopout");
 const dockPopoutInner = document.getElementById("dockPopoutInner");
+
+const desktopFolders = document.querySelectorAll(".desktop-folder");
 
 const fullText = "welcome to my portfolio";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -140,28 +140,14 @@ function updateSequence() {
   document.body.classList.toggle("show-header", progress > 0.78);
 }
 
-hotspots.forEach((hotspot) => {
-  hotspot.addEventListener("click", () => {
-    const target = hotspot.dataset.target;
-    const popout = hotspot.dataset.openPopout;
+desktopFolders.forEach((folder) => {
+  folder.addEventListener("click", (event) => {
+    event.preventDefault();
+    closeDockPopout();
 
-    if (popout === "social") {
-      openSocialPopout();
-      return;
-    }
-
-    if (popout === "notebook") {
-      openNotebookPopout();
-      return;
-    }
-
-    if (!target) return;
-
-    if (target.includes("about")) {
-      navigateWithSlide(target, "right");
-    } else {
-      navigateWithSlide(target, "left");
-    }
+    const href = folder.getAttribute("href");
+    const direction = folder.dataset.slide || "left";
+    navigateWithSlide(href, direction);
   });
 });
 
@@ -200,9 +186,9 @@ nextPageBtn?.addEventListener("click", () => {
 
 document.addEventListener("click", (event) => {
   const clickedInsideDock = event.target.closest(".bottom-dock-wrap");
-  const clickedHotspot = event.target.closest(".hotspot");
+  const clickedDesktopFolder = event.target.closest(".desktop-folder");
 
-  if (!clickedInsideDock && !clickedHotspot) {
+  if (!clickedInsideDock && !clickedDesktopFolder) {
     closeDockPopout();
   }
 });

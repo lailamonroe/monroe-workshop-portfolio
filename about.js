@@ -16,8 +16,8 @@ const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matc
 
 const defaultPanel = {
   label: "ABOUT",
-  title: "Tap or hover over a frame to learn more.",
-  text: "Each image highlights a different part of my life, background, interests, and creative perspective."
+  title: "Tap/Hover over a picture to learn more!",
+  text: "Ask me about travel, Studio Ghibli movies, my current favorite Food Network show, my family, my favorite song/artist at the moment, and Women’s basketball!"
 };
 
 function navigateWithSlide(url, direction = "left") {

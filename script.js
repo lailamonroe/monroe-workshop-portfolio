@@ -8,6 +8,7 @@ const phaseLogo = document.getElementById("phaseLogo");
 const phaseStars = document.getElementById("phaseStars");
 const phaseDesk = document.getElementById("phaseDesk");
 
+
 const cycleLogos = Array.from(document.querySelectorAll(".cycle-logo"));
 const stars = Array.from(document.querySelectorAll(".star"));
 const sceneTrack = document.getElementById("sceneTrack");
@@ -22,7 +23,7 @@ const dockPopoutInner = document.getElementById("dockPopoutInner");
 
 const desktopFolders = document.querySelectorAll(".desktop-folder");
 
-const fullText = "welcome to my portfolio";
+const fullText = "welcome to my portfolio :)";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function clamp(value, min, max) {

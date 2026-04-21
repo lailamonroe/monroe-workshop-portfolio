@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Laila Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="contact-page show-header">
+  <header class="site-header" id="siteHeader">
+    <div class="global-brand">
+      <a href="index.html">
+        <img
+          src="assets/mainnamedarkpurple.png"
+          alt="Laila"
+          class="global-brand-logo"
+        />
+      </a>
+    </div>
+
+    <nav class="nav nav-icons">
+      <a href="index.html" aria-label="Home">
+        <img src="assets/homeicon.png" alt="Home" class="header-icon" />
+      </a>
+      <a href="about.html" aria-label="About">
+        <img src="assets/abouticon.png" alt="About" class="header-icon" />
+      </a>
+      <a href="contact.html" aria-label="Contact">
+        <img src="assets/contact icon.png" alt="Contact" class="header-icon" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="contact-main">
+    <div class="twinkle-stars contact-stars" aria-hidden="true">
+      <img src="assets/star1.png" alt="" class="twinkle-star star-a" />
+      <img src="assets/star2.png" alt="" class="twinkle-star star-b" />
+      <img src="assets/star3.png" alt="" class="twinkle-star star-c" />
+      <img src="assets/star4.png" alt="" class="twinkle-star star-d" />
+      <img src="assets/star1.png" alt="" class="twinkle-star star-e" />
+      <img src="assets/star2.png" alt="" class="twinkle-star star-f" />
+      <img src="assets/star3.png" alt="" class="twinkle-star star-g" />
+      <img src="assets/star4.png" alt="" class="twinkle-star star-h" />
+    </div>
+
+    <section class="contact-hero">
+  <div class="contact-visual">
+    <div class="contact-portrait-wrap">
+      <img
+        src="assets/contactportrait.png"
+        alt="Illustrated portrait of Laila"
+        class="contact-portrait"
+      />
+    </div>
+  </div>
+
+  <div class="contact-copy">
+    <p class="contact-label">LET’S CONNECT</p>
+    <h1>say hi.</h1>
+    <p class="contact-intro">
+      I’m always open to creative conversations, collaborations, opportunities,
+      and connecting with people who love design, storytelling, and culture.
+    </p>
+
+  <div class="contact-links">
+    <a href="mailto:youremail@example.com" class="contact-card">
+      <span class="contact-card-label">Email</span>
+      <span class="contact-card-value">monroelaila05@gmail.com</span>
+    </a>
+
+    <a href="tel:14145551234" class="contact-card">
+      <span class="contact-card-label">Phone</span>
+      <span class="contact-card-value">(715) 919-6803</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <span class="contact-card-label">LinkedIn</span>
+      <span class="contact-card-value">linkedin.com/in/lailamonroe</span>
+    </a>
+
+    <a href="https://instagram.com/artxxlai" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <span class="contact-card-label">Instagram</span>
+      <span class="contact-card-value">@artxxlai</span>
+    </a>
+
+    <a href="assets/Monroe Resume.pdf" download class="contact-card">
+      <span class="contact-card-label">Resume</span>
+      <span class="contact-card-value">Check it out!</span>
+    </a>
+  </div>
+</div>
+</section>
+  </main>
+
+  <div class="bottom-dock-wrap contact-dock-wrap">
+    <div class="dock-popout" id="contactDockPopout">
+      <div class="dock-popout-inner" id="contactDockPopoutInner"></div>
+    </div>
+
+    <div class="bottom-dock contact-dock">
+      <button class="dock-btn" id="contactSocialBtn" aria-label="Socials" type="button">
+        <span class="icon info-icon">i</span>
+      </button>
+
+      <button class="dock-btn" id="contactNotebookBtn" aria-label="Notebook" type="button">
+        <span class="icon notebook-icon"></span>
+      </button>
+
+      <button class="dock-btn" id="contactPrevPageBtn" aria-label="About page" type="button">
+        <span class="icon chevron left"></span>
+      </button>
+
+      <button class="dock-btn is-disabled" id="contactNextPageBtn" aria-label="Next page" type="button">
+        <span class="icon chevron right"></span>
+      </button>
+    </div>
+  </div>
+
+  <script src="contact.js"></script>
+</body>
+</html>

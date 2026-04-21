@@ -24,102 +24,115 @@
       />
     </div>
 
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <nav class="nav nav-icons">
+  <a href="index.html" aria-label="Home">
+    <img src="assets/homeicon.png" alt="Home" class="header-icon" />
+  </a>
+  <a href="about.html" aria-label="About">
+    <img src="assets/abouticon.png" alt="About" class="header-icon" />
+  </a>
+  <a href="contact.html" aria-label="Contact">
+    <img src="assets/contact icon.png" alt="Contact" class="header-icon" />
+  </a>
+</nav>
   </header>
 
   <main class="about-main">
+    <div class="twinkle-stars about-stars" aria-hidden="true">
+  <img src="assets/star1.png" alt="" class="twinkle-star about-star about-star-a" />
+  <img src="assets/star2.png" alt="" class="twinkle-star about-star about-star-b" />
+  <img src="assets/star3.png" alt="" class="twinkle-star about-star about-star-c" />
+  <img src="assets/star4.png" alt="" class="twinkle-star about-star about-star-d" />
+  <img src="assets/star1.png" alt="" class="twinkle-star about-star about-star-e" />
+  <img src="assets/star3.png" alt="" class="twinkle-star about-star about-star-f" />
+</div>
     <section class="about-hero">
-      <div class="about-copy-panel" id="aboutCopyPanel">
-        <p class="about-panel-label" id="aboutPanelLabel">ABOUT</p>
-        <h1 class="about-panel-title" id="aboutPanelTitle">
-          Tap or hover over a frame to learn more.
-        </h1>
-        <p class="about-panel-text" id="aboutPanelText">
-          Each image highlights a different part of my life, background, interests,
-          experiences, and creative perspective.
-        </p>
-      </div>
+  <div class="about-copy-panel" id="aboutCopyPanel">
+    <p class="about-panel-label" id="aboutPanelLabel">ABOUT</p>
+    <h1 class="about-panel-title" id="aboutPanelTitle">
+      Tap/Hover over a picture to learn more!
+    </h1>
+    <p class="about-panel-text" id="aboutPanelText">
+      Ask me about travel, Studio Ghibli movies, my current favorite Food Network show, my family, my favorite song at the moment, and women’s basketball!
+    </p>
+  </div>
 
-      <div class="about-scene">
-        <div class="about-scene-track">
-          <img
-            src="assets/pictures.png"
-            alt="Picture frame wall"
-            class="about-scene-image"
-          />
+  <div class="about-scene">
+    <div class="about-scene-track">
+      <img
+        src="assets/pictures.png"
+        alt="Picture frame wall"
+        class="about-scene-image"
+      />
 
-          <button
-            class="frame-hotspot frame-one"
-            data-label="BIO"
-            data-title="Who I am"
-            data-text="This frame introduces who I am as a creative, student, and person. It can speak to my personality, values, and what drives my work."
-            aria-label="Bio"
-            type="button"
-          >
-            <span class="sr-only">Bio</span>
-          </button>
+      <button
+        class="frame-hotspot frame-one"
+        data-label="BIO"
+        data-title="Who I am"
+        data-text="I’m an aspiring creative who loves the outdoors, travel, and sports. I’ve been on a lot of unique adventures, from mission trips and road trips to sports tournaments and spontaneous flights. Ask me about the cross-country bus trip I took with my friends."
+        aria-label="Bio"
+        type="button"
+      >
+        <span class="sr-only">Bio</span>
+      </button>
 
-          <button
-            class="frame-hotspot frame-two"
-            data-label="BACKGROUND"
-            data-title="My story"
-            data-text="This frame reflects where I come from and the experiences that shaped me. It can represent personal growth, memories, and the foundation behind my perspective."
-            aria-label="Background"
-            type="button"
-          >
-            <span class="sr-only">Background</span>
-          </button>
+      <button
+        class="frame-hotspot frame-two"
+        data-label="BACKGROUND"
+        data-title="My story"
+        data-text="I’m a 22-year-old living in Milwaukee, chasing big dreams in my creative career while exploring culture marketing and UX design. I’m a former athlete who still loves hooping from time to time and cheering on my favorite teams, the Milwaukee Bucks and Timberwolves. I moved to Milwaukee right after high school to challenge myself and grow, and I can honestly say it has shaped me in so many ways. I’ve met amazing people here, learned a lot about myself, and built a life I’m proud of. Milwaukee has been such an important chapter for me, and I’m excited for my next city and next stage of life."
+        aria-label="Background"
+        type="button"
+      >
+        <span class="sr-only">Background</span>
+      </button>
 
-          <button
-            class="frame-hotspot frame-three"
-            data-label="EXPERIENCE"
-            data-title="What I do"
-            data-text="This image can highlight my experience across advertising, design, strategy, and storytelling. It shows the type of work I enjoy creating and building."
-            aria-label="Experience"
-            type="button"
-          >
-            <span class="sr-only">Experience</span>
-          </button>
+      <button
+        class="frame-hotspot frame-three"
+        data-label="COMMUNITY"
+        data-title="What I do"
+        data-text="My number one mission is to provide for my family. I’m the oldest of five from a single-parent household in small-town northwestern Wisconsin. I have a small village that supports me while I work hard to support them too: my siblings, my mom, and my grandparents. Here in Milwaukee, my friends and boyfriend have also become part of that support system. These are the people I do this for. I’m a first-generation student, and I’m breaking multiple family barriers while paving the way for my siblings and even my mom. To me, the most important foundation in life is community, and I’m proud to say mine is full of love and purpose."
+        aria-label="Experience"
+        type="button"
+      >
+        <span class="sr-only">Community</span>
+      </button>
 
-          <button
-            class="frame-hotspot frame-four"
-            data-label="COMMUNITY"
-            data-title="What matters to me"
-            data-text="This frame can speak to the people, teams, and communities that shape how I collaborate and create. It represents connection, support, and shared experiences."
-            aria-label="Community"
-            type="button"
-          >
-            <span class="sr-only">Community</span>
-          </button>
+      <button
+        class="frame-hotspot frame-four"
+        data-label="EXPERIENCE"
+        data-title="What matters to me"
+        data-text="I’m a student at the University of Wisconsin–Milwaukee studying Journalism, Advertising, and Media Studies with a focus in advertising and commercial design. I’m also earning a certificate in Digital Arts and Culture, which ties perfectly into my creative mission of connecting art, culture, and advertising. I’ll be graduating from UW-Milwaukee in May 2026, and then I’ll be onto my next adventure, possibly continuing my education with a master’s degree. Professionally, I’m currently a Technical Business Analyst at Northwestern Mutual, where I’ve been growing my communication skills and learning how to bridge the gap between software engineers and designers to help create thoughtful, effective products. I was offered this role after my internship in summer 2025."
+        aria-label="Community"
+        type="button"
+      >
+        <span class="sr-only">Experience</span>
+      </button>
 
-          <button
-            class="frame-hotspot frame-five"
-            data-label="INSPIRATION"
-            data-title="What inspires me"
-            data-text="This image represents the visuals, culture, spaces, and aesthetics that inspire my creative direction. It can connect to art, design, fashion, media, and mood."
-            aria-label="Inspiration"
-            type="button"
-          >
-            <span class="sr-only">Inspiration</span>
-          </button>
+      <button
+        class="frame-hotspot frame-five"
+        data-label="INSPIRATION"
+        data-title="What inspires me"
+        data-text="I’ve always been ambitious and hardworking. I’ve been self-made from the start. I grew up in a broken household, faced a lot of obstacles early in life, and earned a full-ride scholarship to a private college preparatory high school, the Marshall School in Duluth, Minnesota, where I played basketball and received an incredible education. Through that experience, I grew into my identity and discovered a deep passion for sports, while also getting the chance to explore opportunities far beyond my hometown of 300 people in small-town Wisconsin. I learned how powerful community and opportunity can be when people come together with one shared goal. In this image, that goal was making it to state and winning it all in 2020 at the Minnesota Girls Basketball State Tournament, the first state tournament win in school history. That experience taught me the value of community, resilience, and hard work. It showed me that when you believe in something fully, anything can happen. That mindset will stay with me forever. This translates directly into how I approach my career in design, and I'm eager to see where it takes me."
+        aria-label="Inspiration"
+        type="button"
+      >
+        <span class="sr-only">Inspiration</span>
+      </button>
 
-          <button
-            class="frame-hotspot frame-six"
-            data-label="FUTURE"
-            data-title="Where I’m headed"
-            data-text="This frame can represent where I want to grow next and the kind of work I hope to make in the future. It points toward my goals, direction, and next chapter."
-            aria-label="Future"
-            type="button"
-          >
-            <span class="sr-only">Future</span>
-          </button>
-        </div>
-      </div>
-    </section>
+      <button
+        class="frame-hotspot frame-six"
+        data-label="FUTURE"
+        data-title="Where I’m headed"
+        data-text="I’m working toward territory no one in my village has stepped into before. I’m creating a new normal for my family, one built on financial stability, opportunity, and the ability to truly experience what the world has to offer. I’m also working toward finding the right place for myself in the creative industry, maybe even becoming an art director one day. The world is my oyster, so we’ll see. More than anything, I’m building a life rooted in hard work, integrity, resilience, ambition, compassion, community, and joy."
+        aria-label="Future"
+        type="button"
+      >
+        <span class="sr-only">Future</span>
+      </button>
+    </div>
+  </div>
+</section>
   </main>
 
   <div class="bottom-dock-wrap">

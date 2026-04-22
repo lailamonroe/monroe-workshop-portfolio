@@ -1362,8 +1362,6 @@ body.show-header .bottom-dock-wrap {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(131, 35, 108, 0.14) 0%, rgba(255, 214, 233, 0.16) 40%, rgba(255, 245, 251, 0.78) 100%);
   z-index: 1;
 }
 
@@ -1492,6 +1490,12 @@ body.show-header .bottom-dock-wrap {
   object-fit: cover;
 }
 
+.gallery-bus-stop img {
+  min-height: 560px;
+  object-fit: cover;
+  object-position: center;
+}
+
 .gallery-wide img {
   min-height: 420px;
 }
@@ -1593,6 +1597,103 @@ body.show-header .bottom-dock-wrap {
   .poppi-meta-card,
   .poppi-page .strategy-card {
     padding: 1.4rem;
+  }
+}
+
+/* =========================
+   POPPI FLOATING SYMBOLS
+========================= */
+
+body.poppi-symbol-page {
+  background: #fff5fb;
+}
+
+.poppi-symbol-page {
+  overflow-x: hidden;
+}
+
+.poppi-symbol-page .poppi-page {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(180deg, #ffd1e5 0%, #fff2f8 42%, #fff8fc 100%);
+}
+
+.poppi-symbol-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.poppi-symbol {
+  position: absolute;
+  top: -140px;
+  width: 78px;
+  height: auto;
+  opacity: 0.14;
+  will-change: transform;
+  animation: poppiFloat linear infinite;
+  filter: drop-shadow(0 6px 12px rgba(255, 95, 162, 0.14));
+}
+
+.poppi-page .section,
+.poppi-hero,
+.poppi-intro,
+.poppi-feature,
+.poppi-gallery,
+.poppi-print-row,
+.poppi-page .strategy,
+.poppi-page .back-link {
+  position: relative;
+  z-index: 2;
+}
+
+.poppi-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.poppi-hero::before {
+  z-index: 1;
+}
+
+.poppi-hero .hero-content,
+.poppi-corner-logo {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes poppiFloat {
+  0% {
+    transform: translateY(-140px) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(25vh) translateX(24px) rotate(70deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-22px) rotate(145deg);
+  }
+  75% {
+    transform: translateY(75vh) translateX(20px) rotate(220deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-14px) rotate(300deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .poppi-symbol {
+    width: 54px;
+    opacity: 0.1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poppi-symbol {
+    animation: none;
+    opacity: 0.06;
   }
 }
 
@@ -2327,6 +2428,111 @@ body.show-header .bottom-dock-wrap {
   }
 }
 
+/* =========================
+   NPCA FALLING LEAVES
+========================= */
+
+body.npca-page {
+  background: var(--project-bg);
+}
+
+.npca-page {
+  overflow-x: hidden;
+}
+
+.npca-page .project-page {
+  position: relative;
+  background: var(--project-bg);
+  isolation: isolate;
+}
+
+.leaf-fall-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.leaf-fall {
+  position: absolute;
+  top: -140px;
+  width: 72px;
+  height: auto;
+  opacity: 0.16;
+  will-change: transform;
+  animation: leafDrift linear infinite;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.16));
+}
+
+.project-hero,
+.project-intro,
+.full-image,
+.text-block,
+.campaign-grid-custom,
+.strategy,
+.split-showcase,
+.takeaway-showcase,
+.back-link {
+  position: relative;
+  z-index: 2;
+}
+
+.project-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.project-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(3, 5, 4, 0.35), rgba(3, 5, 4, 0.72));
+  z-index: 1;
+}
+
+.hero-content,
+.hero-corner-logo {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes leafDrift {
+  0% {
+    transform: translateY(-140px) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(25vh) translateX(28px) rotate(80deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-24px) rotate(160deg);
+  }
+  75% {
+    transform: translateY(75vh) translateX(18px) rotate(240deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-12px) rotate(320deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .leaf-fall {
+    width: 52px;
+    opacity: 0.12;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf-fall {
+    animation: none;
+    opacity: 0.08;
+  }
+}
+
 /* Keep accessibility motion reduction, but do not fully kill star twinkle */
 
 @media (prefers-reduced-motion: reduce) {
@@ -3015,7 +3221,7 @@ body.show-header .bottom-dock-wrap {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(20, 42, 29, 0.28) 0%, rgba(28, 65, 43, 0.18) 38%, rgba(237, 247, 239, 0.82) 100%);
+  
   z-index: 1;
 }
 

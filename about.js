@@ -45,6 +45,10 @@ function openSocialPopout() {
       <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
         <img src="assets/logo2.png" alt="LinkedIn" />
       </a>
+      </a>
+       <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+        <img src="assets/logo3.png" alt="Github" />
+      </a>
     </div>
   `;
   dockPopout.classList.add("active");
@@ -53,10 +57,10 @@ function openSocialPopout() {
 function openNotebookPopout() {
   dockPopoutInner.innerHTML = `
     <div class="popout-note">
-      <div class="popout-note-label">NOTEBOOK</div>
-      <div class="popout-note-title">Sketchbook / Notes</div>
+      <div class="popout-note-label">Brain Break</div>
+      <div class="popout-note-title">Thoughts and Quotes</div>
       <div class="popout-note-text">
-        Process, thoughts, inspiration, and quick pieces from my creative world.
+        mhm... scribble scribble...
       </div>
     </div>
   `;

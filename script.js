@@ -8,7 +8,6 @@ const phaseLogo = document.getElementById("phaseLogo");
 const phaseStars = document.getElementById("phaseStars");
 const phaseDesk = document.getElementById("phaseDesk");
 
-
 const cycleLogos = Array.from(document.querySelectorAll(".cycle-logo"));
 const stars = Array.from(document.querySelectorAll(".star"));
 const sceneTrack = document.getElementById("sceneTrack");
@@ -25,6 +24,8 @@ const desktopFolders = document.querySelectorAll(".desktop-folder");
 
 const fullText = "welcome to my portfolio :)";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const mobileQuery = window.matchMedia("(max-width: 760px)");
+const tabletQuery = window.matchMedia("(max-width: 1024px)");
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -32,6 +33,69 @@ function clamp(value, min, max) {
 
 function mapProgress(value, start, end) {
   return clamp((value - start) / (end - start), 0, 1);
+}
+
+function getSequenceConfig() {
+  const isMobile = mobileQuery.matches;
+  const isTablet = tabletQuery.matches;
+
+  if (isMobile) {
+    return {
+      lightStart: 0.1,
+      lightEnd: 0.28,
+      logoFadeStart: 0.08,
+      logoFadeEnd: 0.2,
+      starsInStart: 0.18,
+      starsInEnd: 0.32,
+      starsOutStart: 0.42,
+      starsOutEnd: 0.56,
+      typingStart: 0.22,
+      typingEnd: 0.38,
+      deskInStart: 0.4,
+      deskInEnd: 0.62,
+      headerStart: 0.6,
+      deskScaleStart: 0.9,
+      deskScaleEnd: 1.02
+    };
+  }
+
+  if (isTablet) {
+    return {
+      lightStart: 0.12,
+      lightEnd: 0.32,
+      logoFadeStart: 0.1,
+      logoFadeEnd: 0.24,
+      starsInStart: 0.22,
+      starsInEnd: 0.36,
+      starsOutStart: 0.48,
+      starsOutEnd: 0.62,
+      typingStart: 0.26,
+      typingEnd: 0.44,
+      deskInStart: 0.5,
+      deskInEnd: 0.7,
+      headerStart: 0.72,
+      deskScaleStart: 0.88,
+      deskScaleEnd: 1.01
+    };
+  }
+
+  return {
+    lightStart: 0.14,
+    lightEnd: 0.34,
+    logoFadeStart: 0.1,
+    logoFadeEnd: 0.26,
+    starsInStart: 0.22,
+    starsInEnd: 0.36,
+    starsOutStart: 0.52,
+    starsOutEnd: 0.64,
+    typingStart: 0.28,
+    typingEnd: 0.46,
+    deskInStart: 0.54,
+    deskInEnd: 0.74,
+    headerStart: 0.78,
+    deskScaleStart: 0.86,
+    deskScaleEnd: 1
+  };
 }
 
 function navigateWithSlide(url, direction = "left") {
@@ -46,18 +110,23 @@ function navigateWithSlide(url, direction = "left") {
 }
 
 function closeDockPopout() {
+  if (!dockPopout || !dockPopoutInner) return;
   dockPopout.classList.remove("active");
   dockPopoutInner.innerHTML = "";
 }
 
 function openSocialPopout() {
+  if (!dockPopout || !dockPopoutInner) return;
   dockPopoutInner.innerHTML = `
     <div class="popout-socials">
-      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="Instagram">
+      <a href="https://instagram.com/artxxlai" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="Instagram">
         <img src="assets/logo1.png" alt="Instagram" />
       </a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
         <img src="assets/logo2.png" alt="LinkedIn" />
+      </a>
+       <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+        <img src="assets/logo3.png" alt="Github" />
       </a>
     </div>
   `;
@@ -65,12 +134,13 @@ function openSocialPopout() {
 }
 
 function openNotebookPopout() {
+  if (!dockPopout || !dockPopoutInner) return;
   dockPopoutInner.innerHTML = `
     <div class="popout-note">
-      <div class="popout-note-label">NOTEBOOK</div>
-      <div class="popout-note-title">Sketchbook / Notes</div>
+      <div class="popout-note-label">Brain Break</div>
+      <div class="popout-note-title">Thoughts and Quotes </div>
       <div class="popout-note-text">
-        Process, thoughts, inspiration, and quick pieces from my creative world.
+        “Everything negative, pressure, challenges, is all an opportunity for me to rise.” - Kobe Bryant 
       </div>
     </div>
   `;
@@ -79,13 +149,13 @@ function openNotebookPopout() {
 
 let logoIndex = 0;
 
-if (!prefersReducedMotion) {
+if (!prefersReducedMotion && cycleLogos.length > 0) {
   setInterval(() => {
     cycleLogos.forEach((logo, index) => {
       logo.classList.toggle("active", index === logoIndex);
     });
     logoIndex = (logoIndex + 1) % cycleLogos.length;
-  }, 220);
+  }, 260);
 } else {
   cycleLogos.forEach((logo, index) => {
     logo.classList.toggle("active", index === 0);
@@ -93,23 +163,26 @@ if (!prefersReducedMotion) {
 }
 
 function updateSequence() {
-  if (!sequence) return;
+  if (!sequence || !bgDark || !bgLight || !phaseLogo || !phaseStars || !phaseDesk || !sceneTrack) {
+    return;
+  }
 
+  const config = getSequenceConfig();
   const rect = sequence.getBoundingClientRect();
   const total = Math.max(rect.height - window.innerHeight, 1);
   const progress = clamp(-rect.top / total, 0, 1);
 
-  const lightReveal = mapProgress(progress, 0.14, 0.34);
+  const lightReveal = mapProgress(progress, config.lightStart, config.lightEnd);
   bgLight.style.opacity = lightReveal;
   bgDark.style.opacity = 1 - lightReveal;
 
-  const logoFade = 1 - mapProgress(progress, 0.1, 0.26);
-  const logoScale = 1 - mapProgress(progress, 0, 0.26) * 0.08;
+  const logoFade = 1 - mapProgress(progress, config.logoFadeStart, config.logoFadeEnd);
+  const logoScale = 1 - mapProgress(progress, 0, config.logoFadeEnd) * 0.08;
   phaseLogo.style.opacity = logoFade;
   phaseLogo.style.transform = `scale(${logoScale})`;
 
-  const starsIn = mapProgress(progress, 0.22, 0.36);
-  const starsOut = 1 - mapProgress(progress, 0.52, 0.64);
+  const starsIn = mapProgress(progress, config.starsInStart, config.starsInEnd);
+  const starsOut = 1 - mapProgress(progress, config.starsOutStart, config.starsOutEnd);
   const starsOpacity = clamp(starsIn * starsOut, 0, 1);
   phaseStars.style.opacity = starsOpacity;
 
@@ -123,22 +196,22 @@ function updateSequence() {
 
     star.style.opacity = opacity;
     star.style.transform = prefersReducedMotion
-      ? `translateY(0) scale(1) rotate(0deg)`
+      ? "translateY(0) scale(1) rotate(0deg)"
       : `translateY(${y}px) scale(${scale}) rotate(${rotation}deg)`;
   });
 
-  const typingProgress = mapProgress(progress, 0.28, 0.46);
+  const typingProgress = mapProgress(progress, config.typingStart, config.typingEnd);
   const charCount = Math.floor(fullText.length * typingProgress);
   typedText.textContent = fullText.slice(0, charCount);
 
-  const deskIn = mapProgress(progress, 0.54, 0.74);
+  const deskIn = mapProgress(progress, config.deskInStart, config.deskInEnd);
   phaseDesk.style.opacity = deskIn;
 
-  const deskScale = 0.86 + deskIn * 0.14;
+  const deskScale = config.deskScaleStart + deskIn * (config.deskScaleEnd - config.deskScaleStart);
   sceneTrack.style.opacity = deskIn;
   sceneTrack.style.transform = `translate(-50%, -50%) scale(${deskScale})`;
 
-  document.body.classList.toggle("show-header", progress > 0.78);
+  document.body.classList.toggle("show-header", progress > config.headerStart);
 }
 
 desktopFolders.forEach((folder) => {

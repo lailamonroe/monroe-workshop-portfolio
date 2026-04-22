@@ -1,3 +1,28 @@
+function pinProjectHeader() {
+  const header = document.querySelector(".project-site-header");
+  if (!header) return;
+
+  const applyPinnedStyles = () => {
+    header.style.position = "fixed";
+    header.style.top = "0";
+    header.style.left = "0";
+    header.style.right = "0";
+    header.style.transform = "none";
+    header.style.opacity = "1";
+    header.style.pointerEvents = "auto";
+    header.style.transition = "none";
+    header.style.background = "transparent";
+    header.style.borderBottom = "0";
+    header.style.backdropFilter = "none";
+  };
+
+  applyPinnedStyles();
+  window.addEventListener("scroll", applyPinnedStyles, { passive: true });
+  window.addEventListener("resize", applyPinnedStyles);
+}
+
+document.addEventListener("DOMContentLoaded", pinProjectHeader);
+
 document.addEventListener("DOMContentLoaded", () => {
   const leafLayer = document.querySelector(".leaf-fall-layer");
 
@@ -25,15 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const startOffset = Math.random() * pageHeight * 0.9;
     const duration = 18 + Math.random() * 14;
     const delay = Math.random() * -25;
-    const size = 0.65 + Math.random() * 0.65;
-    const opacity = 0.05 + Math.random() * 0.05;
+   const size = 0.95 + Math.random() * 0.9;
+    const opacity = 0.32 + Math.random() * 0.22;
 
     leaf.style.left = `${startLeft}%`;
     leaf.style.top = `${-140 + startOffset}px`;
     leaf.style.animationDuration = `${duration}s`;
     leaf.style.animationDelay = `${delay}s`;
     leaf.style.opacity = opacity.toFixed(2);
-    leaf.style.width = `${55 * size}px`;
+    leaf.style.width = `${82 * size}px`;
 
     leafLayer.appendChild(leaf);
   }

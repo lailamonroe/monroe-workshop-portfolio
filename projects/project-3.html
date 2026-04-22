@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Art and the City | Portfolio</title>
-
+  <meta name="theme-color" content="#3a003f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="../assets/namepurple.png" />
+  <link rel="apple-touch-icon" href="../assets/namepurple.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -12,10 +17,10 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=4" />
 </head>
 <body>
-  <header class="site-header project-site-header city-site-header">
+  <header class="site-header project-site-header city-site-header" style="position:fixed;top:0;left:0;right:0;transform:none;">
     <div class="global-brand">
       <a href="../index.html">
         <img
@@ -93,14 +98,20 @@
         </p>
       </div>
 
-      <a href="https://lailamonroe.github.io/monroe-final/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="city-preview-card city-preview-link">
+      <div class="city-preview-card city-preview-button-card">
         <span class="city-preview-link-label">Live Preview</span>
-        <span class="city-preview-link-title">Open the website</span>
-        <span class="city-preview-link-text">Visit the full Art and the City experience.</span>
-      </a>
+        <h3 class="city-preview-button-title">Open the Art and the City website</h3>
+        <p class="city-preview-button-text">
+          Visit the full project to explore the immersive experience directly.
+        </p>
+        <a
+          href="https://lailamonroe.github.io/monroe-final/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="city-preview-button-action">
+          Launch Live Site
+        </a>
+      </div>
     </section>
 
     <section class="section city-links-section">
@@ -184,6 +195,8 @@
     <section class="back-link section">
       <a href="../projects/projects.html">← Back to Projects</a>
     </section>
+      <script src="../projects.js?v=2"></script>
+      <script src="../pwa.js?v=4"></script>
   </main>
 </body>
 </html>

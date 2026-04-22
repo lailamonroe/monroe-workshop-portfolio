@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>poppi mini | Portfolio</title>
+   <meta name="theme-color" content="#3a003f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="../assets/namepurple.png" />
+  <link rel="apple-touch-icon" href="../assets/namepurple.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,10 +18,10 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=4" />
 </head>
 <body class="poppi-symbol-page">
-  <header class="site-header project-site-header poppi-site-header">
+  <header class="site-header project-site-header poppi-site-header" style="position:fixed;top:0;left:0;right:0;transform:none;">
     <div class="global-brand">
       <a href="../index.html">
         <img
@@ -195,6 +201,7 @@
     </section>
   </main>
 
-  <script src="../projects.js"></script>
+  <script src="../projects.js?v=2"></script>
+  <script src="../pwa.js?v=4"></script>
 </body>
 </html>

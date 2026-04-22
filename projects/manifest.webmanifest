@@ -1,0 +1,18 @@
+{
+  "name": "Laila Monroe Portfolio",
+  "short_name": "Laila Portfolio",
+  "description": "Portfolio site for Laila Monroe showcasing design and creative work.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#efe3f3",
+  "theme_color": "#3a003f",
+  "icons": [
+    {
+      "src": "/assets/smithlogo.png",
+      "sizes": "1280x1280",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

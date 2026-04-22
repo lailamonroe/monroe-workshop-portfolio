@@ -53,7 +53,6 @@ function getSequenceConfig() {
       typingEnd: 0.38,
       deskInStart: 0.4,
       deskInEnd: 0.62,
-      headerStart: 0.6,
       deskScaleStart: 0.9,
       deskScaleEnd: 1.02
     };
@@ -73,7 +72,6 @@ function getSequenceConfig() {
       typingEnd: 0.44,
       deskInStart: 0.5,
       deskInEnd: 0.7,
-      headerStart: 0.72,
       deskScaleStart: 0.88,
       deskScaleEnd: 1.01
     };
@@ -92,7 +90,6 @@ function getSequenceConfig() {
     typingEnd: 0.46,
     deskInStart: 0.54,
     deskInEnd: 0.74,
-    headerStart: 0.78,
     deskScaleStart: 0.86,
     deskScaleEnd: 1
   };
@@ -210,8 +207,20 @@ function updateSequence() {
   const deskScale = config.deskScaleStart + deskIn * (config.deskScaleEnd - config.deskScaleStart);
   sceneTrack.style.opacity = deskIn;
   sceneTrack.style.transform = `translate(-50%, -50%) scale(${deskScale})`;
+}
 
-  document.body.classList.toggle("show-header", progress > config.headerStart);
+function updateHeaderVisibility() {
+  if (!sequence) {
+    return;
+  }
+
+  const config = getSequenceConfig();
+  const rect = sequence.getBoundingClientRect();
+  const total = Math.max(rect.height - window.innerHeight, 1);
+  const progress = clamp(-rect.top / total, 0, 1);
+  const deskIn = mapProgress(progress, config.deskInStart, config.deskInEnd);
+
+  document.body.classList.toggle("show-header", deskIn > 0.02);
 }
 
 desktopFolders.forEach((folder) => {
@@ -274,7 +283,11 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("scroll", updateSequence, { passive: true });
+window.addEventListener("scroll", updateHeaderVisibility, { passive: true });
 window.addEventListener("resize", updateSequence);
+window.addEventListener("resize", updateHeaderVisibility);
 window.addEventListener("load", updateSequence);
+window.addEventListener("load", updateHeaderVisibility);
 
 updateSequence();
+updateHeaderVisibility();

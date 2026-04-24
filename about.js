@@ -26,6 +26,11 @@ function navigateWithSlide(url, direction = "left") {
     sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
   }
 
+  if (isTouchDevice) {
+    window.location.href = url;
+    return;
+  }
+
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
   document.body.classList.add(
     direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -94,7 +99,7 @@ function revealAboutPanelOnMobile() {
 
   requestAnimationFrame(() => {
     aboutPanelTitle.scrollIntoView({
-      behavior: "smooth",
+      behavior: "auto",
       block: "nearest"
     });
   });

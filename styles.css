@@ -6,7 +6,10 @@
 
 :root {
   --viewport-height: 100vh;
-  --page-header-gap: 24px;
+  --page-header-gap: 34px;
+  --site-header-height: 84px;
+  --site-header-height-mobile: 72px;
+  --site-header-height-mobile-tight: 66px;
   --bg-dark-1: #35003d;
   --bg-dark-2: #220027;
   --bg-light-1: #efe3f3;
@@ -46,6 +49,10 @@ body {
 }
 
 body:not(.home-page) {
+  animation: none;
+}
+
+body.mobile-performance-mode {
   animation: none;
 }
 
@@ -108,9 +115,12 @@ img {
   inset: 0 0 auto 0;
   z-index: 1000;
   padding: 22px 30px;
+  min-height: var(--site-header-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: visible;
+  isolation: isolate;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -128,6 +138,24 @@ body:not(.home-page) .site-header {
   transform: none !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+body:not(.home-page) .site-header::after {
+  content: none !important;
+}
+
+body.about-page .site-header,
+body.contact-page .site-header,
+.more-projects-header {
+  --header-fill: transparent;
+}
+
+.project-site-header,
+.poppi-site-header,
+.city-site-header,
+.smithsonian-site-header,
+.blendedbond-site-header {
+  --header-fill: transparent;
 }
 
 body.home-page .site-header {
@@ -210,6 +238,56 @@ body.home-page.show-header .site-header {
   position: absolute;
   inset: 0;
   will-change: opacity, transform;
+}
+
+body.mobile-performance-mode .scroll-sequence {
+  height: 300vh;
+}
+
+body.mobile-performance-mode .bg-dark {
+  background: linear-gradient(180deg, var(--bg-dark-1) 0%, #2d0034 50%, var(--bg-dark-2) 100%);
+}
+
+body.mobile-performance-mode .bg-light {
+  background: linear-gradient(180deg, var(--bg-light-1) 0%, var(--bg-light-2) 100%);
+}
+
+body.mobile-performance-mode .bg-layer,
+body.mobile-performance-mode .phase,
+body.mobile-performance-mode .welcome-wrap,
+body.mobile-performance-mode .scene-track {
+  will-change: auto;
+}
+
+body.mobile-performance-mode .intro-scroll-prompt {
+  backdrop-filter: none;
+}
+
+body.mobile-performance-mode .intro-scroll-prompt-star,
+body.mobile-performance-mode .folder-icon {
+  filter: none;
+}
+
+body.mobile-performance-mode .desktop-folder,
+body.mobile-performance-mode .dock-btn,
+body.mobile-performance-mode .popout-social-link {
+  transition: none;
+}
+
+body.mobile-performance-mode .cursor,
+body.mobile-performance-mode .star {
+  animation: none;
+}
+
+body.mobile-performance-mode .star {
+  filter: none;
+  will-change: auto;
+}
+
+body.mobile-performance-mode .star-5,
+body.mobile-performance-mode .star-6,
+body.mobile-performance-mode .star-7 {
+  display: none;
 }
 
 /* Phase 1 */
@@ -1861,7 +1939,7 @@ body.show-header .bottom-dock-wrap {
 @media (max-width: 760px) {
   .poppi-hero {
     min-height: 82vh;
-    padding: 7rem 1.2rem 2rem;
+    padding: calc(7rem + var(--page-header-gap)) 1.2rem 2rem;
   }
 
   .poppi-hero .project-label,
@@ -2424,10 +2502,15 @@ body.poppi-symbol-page {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --page-header-gap: 84px;
+  }
+
   .site-header {
     position: fixed !important;
     inset: 0 0 auto 0 !important;
     padding: calc(env(safe-area-inset-top, 0px) + 30px) 16px 12px;
+    min-height: var(--site-header-height-mobile);
     flex-direction: row;
     gap: 12px;
     justify-content: space-between;
@@ -2444,7 +2527,12 @@ body.poppi-symbol-page {
     transition: opacity 0.25s ease, transform 0.25s ease !important;
   }
 
-  body.home-page.show-header .site-header,
+  body.home-page.show-header .site-header {
+    background: transparent !important;
+    border: 0 !important;
+    backdrop-filter: none !important;
+  }
+
   body:not(.home-page) .site-header,
   .project-site-header,
   .poppi-site-header,
@@ -2460,6 +2548,8 @@ body.poppi-symbol-page {
     width: 100% !important;
     margin: 0 !important;
     z-index: 3000 !important;
+    min-height: var(--site-header-height-mobile) !important;
+    padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 8px !important;
     transform: none !important;
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -2644,7 +2734,7 @@ body.poppi-symbol-page {
   .project-hero,
   .poppi-hero {
     min-height: 85vh;
-    padding: 7rem 1.2rem 2rem;
+    padding: calc(7rem + var(--page-header-gap)) 1.2rem 2rem;
   }
 
   .project-page .hero-subtitle,
@@ -2710,11 +2800,48 @@ body.poppi-symbol-page {
   }
 }
 
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body,
+  body.page-slide-out-left,
+  body.page-slide-out-right {
+    animation: none !important;
+  }
+
+  .twinkle-star {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  .leaf-fall,
+  .poppi-symbol,
+  .smithsonian-flower {
+    filter: none !important;
+  }
+
+  .file-card,
+  .contact-card,
+  .desktop-folder,
+  .popout-social-link,
+  .popout-note,
+  .dock-btn {
+    transition: none !important;
+  }
+}
+
 @media (max-width: 480px) {
+  :root {
+    --page-header-gap: 94px;
+  }
+
   .site-header {
     position: fixed !important;
     inset: 0 0 auto 0 !important;
     padding: calc(env(safe-area-inset-top, 0px) + 28px) 12px 10px;
+    min-height: var(--site-header-height-mobile-tight);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -2748,10 +2875,15 @@ body.poppi-symbol-page {
     width: 100% !important;
     margin: 0 !important;
     z-index: 3000 !important;
+    min-height: var(--site-header-height-mobile-tight) !important;
+    padding: calc(env(safe-area-inset-top, 0px) + 12px) 12px 6px !important;
     transform: none !important;
     opacity: 1 !important;
     pointer-events: auto !important;
     transition: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    backdrop-filter: none !important;
   }
 
   .global-brand-logo {
@@ -2841,7 +2973,7 @@ body.poppi-symbol-page {
   }
 
   .about-main {
-    padding: 150px 12px 94px;
+    padding: calc(138px + var(--page-header-gap)) 12px 94px;
   }
 
   .about-panel-label {
@@ -3348,7 +3480,7 @@ body.npca-page {
 
   .city-hero {
     min-height: 76vh;
-    padding: 7rem 1.2rem 2rem;
+    padding: calc(7rem + var(--page-header-gap)) 1.2rem 2rem;
   }
 
   .city-page .section {
@@ -3702,7 +3834,7 @@ body.npca-page {
 
   .smithsonian-hero {
     min-height: 84vh;
-    padding: 7rem 1.2rem 2rem;
+    padding: calc(7rem + var(--page-header-gap)) 1.2rem 2rem;
   }
 
   .smithsonian-corner-logo {
@@ -4077,7 +4209,7 @@ body.npca-page {
 
   .blendedbond-hero {
     min-height: 72vh;
-    padding: 7rem 1.2rem 2rem;
+    padding: calc(7rem + var(--page-header-gap)) 1.2rem 2rem;
   }
 
   .blendedbond-top-actions {

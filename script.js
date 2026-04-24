@@ -26,7 +26,11 @@ const fullText = "welcome to my portfolio :)";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const mobileQuery = window.matchMedia("(max-width: 760px)");
 const tabletQuery = window.matchMedia("(max-width: 1024px)");
+const touchQuery = window.matchMedia("(hover: none), (pointer: coarse)");
 const RETURN_TO_DESK_KEY = "return-to-home-desk";
+const mobilePerformanceMode = prefersReducedMotion || mobileQuery.matches || touchQuery.matches;
+
+document.body.classList.toggle("mobile-performance-mode", mobilePerformanceMode);
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -97,6 +101,11 @@ function getSequenceConfig() {
 }
 
 function navigateWithSlide(url, direction = "left") {
+  if (mobilePerformanceMode) {
+    window.location.href = url;
+    return;
+  }
+
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
   document.body.classList.add(
     direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -176,10 +185,16 @@ if (!prefersReducedMotion && cycleLogos.length > 0) {
       logo.classList.toggle("active", index === logoIndex);
     });
     logoIndex = (logoIndex + 1) % cycleLogos.length;
-  }, 260);
+  }, mobilePerformanceMode ? 720 : tabletQuery.matches ? 560 : 420);
 } else {
   cycleLogos.forEach((logo, index) => {
     logo.classList.toggle("active", index === 0);
+  });
+}
+
+if (mobilePerformanceMode) {
+  stars.forEach((star) => {
+    star.style.transform = "none";
   });
 }
 
@@ -217,19 +232,25 @@ function updateSequence(metrics = getSequenceMetrics()) {
   const starsOpacity = clamp(starsIn * starsOut, 0, 1);
   phaseStars.style.opacity = starsOpacity;
 
-  stars.forEach((star, index) => {
-    const stagger = index * 0.03;
-    const local = clamp((starsIn - stagger) / 0.6, 0, 1);
-    const y = 60 - local * 95;
-    const scale = 0.8 + local * 0.24;
-    const rotation = (index % 2 === 0 ? 1 : -1) * (14 - local * 20);
-    const opacity = clamp(local * starsOut * 1.2, 0, 1);
+  if (mobilePerformanceMode) {
+    stars.forEach((star) => {
+      star.style.opacity = starsOpacity;
+    });
+  } else {
+    stars.forEach((star, index) => {
+      const stagger = index * 0.03;
+      const local = clamp((starsIn - stagger) / 0.6, 0, 1);
+      const y = 60 - local * 95;
+      const scale = 0.8 + local * 0.24;
+      const rotation = (index % 2 === 0 ? 1 : -1) * (14 - local * 20);
+      const opacity = clamp(local * starsOut * 1.2, 0, 1);
 
-    star.style.opacity = opacity;
-    star.style.transform = prefersReducedMotion
-      ? "translateY(0) scale(1) rotate(0deg)"
-      : `translateY(${y}px) scale(${scale}) rotate(${rotation}deg)`;
-  });
+      star.style.opacity = opacity;
+      star.style.transform = prefersReducedMotion
+        ? "translateY(0) scale(1) rotate(0deg)"
+        : `translateY(${y}px) scale(${scale}) rotate(${rotation}deg)`;
+    });
+  }
 
   const typingProgress = mapProgress(progress, config.typingStart, config.typingEnd);
   const charCount = Math.floor(fullText.length * typingProgress);
@@ -253,12 +274,19 @@ function updateHeaderVisibility(metrics = getSequenceMetrics()) {
 }
 
 let homeSequenceFrame = null;
+let lastRenderedProgress = -1;
 
 function renderHomeSequence() {
   homeSequenceFrame = null;
 
   const metrics = getSequenceMetrics();
   if (!metrics) return;
+
+  if (mobilePerformanceMode && Math.abs(metrics.progress - lastRenderedProgress) < 0.004) {
+    return;
+  }
+
+  lastRenderedProgress = metrics.progress;
 
   updateSequence(metrics);
   updateHeaderVisibility(metrics);

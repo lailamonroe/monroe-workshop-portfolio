@@ -2,26 +2,21 @@ function pinProjectHeader() {
   const header = document.querySelector(".project-site-header");
   if (!header) return;
 
-  const applyPinnedStyles = () => {
-    header.style.position = "fixed";
-    header.style.top = "0";
-    header.style.left = "0";
-    header.style.right = "0";
-    header.style.transform = "none";
-    header.style.opacity = "1";
-    header.style.pointerEvents = "auto";
-    header.style.transition = "none";
-    header.style.background = "transparent";
-    header.style.borderBottom = "0";
-    header.style.backdropFilter = "none";
-  };
-
-  applyPinnedStyles();
-  window.addEventListener("scroll", applyPinnedStyles, { passive: true });
-  window.addEventListener("resize", applyPinnedStyles);
+  header.style.position = "fixed";
+  header.style.top = "0";
+  header.style.left = "0";
+  header.style.right = "0";
+  header.style.transform = "none";
+  header.style.opacity = "1";
+  header.style.pointerEvents = "auto";
+  header.style.transition = "none";
+  header.style.background = "transparent";
+  header.style.borderBottom = "0";
+  header.style.backdropFilter = "none";
 }
 
 const RETURN_TO_DESK_KEY = "return-to-home-desk";
+const mobilePerformanceMode = window.matchMedia("(prefers-reduced-motion: reduce), (max-width: 760px), (hover: none), (pointer: coarse)").matches;
 
 document.querySelectorAll('a[href="../index.html"]').forEach((link) => {
   link.addEventListener("click", () => {
@@ -46,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageHeight = document.querySelector(".project-page").scrollHeight;
   leafLayer.style.height = `${pageHeight}px`;
 
-  const leafCount = window.innerWidth < 768 ? 14 : 24;
+  const leafCount = mobilePerformanceMode ? 5 : window.innerWidth < 768 ? 8 : 24;
 
   for (let i = 0; i < leafCount; i++) {
     const leaf = document.createElement("img");
@@ -56,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startLeft = Math.random() * 100;
     const startOffset = Math.random() * pageHeight * 0.9;
-    const duration = 18 + Math.random() * 14;
+    const duration = mobilePerformanceMode ? 24 + Math.random() * 12 : 18 + Math.random() * 14;
     const delay = Math.random() * -25;
-   const size = 0.95 + Math.random() * 0.9;
-    const opacity = 0.32 + Math.random() * 0.22;
+    const size = mobilePerformanceMode ? 0.72 + Math.random() * 0.4 : 0.95 + Math.random() * 0.9;
+    const opacity = mobilePerformanceMode ? 0.12 + Math.random() * 0.08 : 0.32 + Math.random() * 0.22;
 
     leaf.style.left = `${startLeft}%`;
     leaf.style.top = `${-140 + startOffset}px`;
@@ -80,6 +75,11 @@ const contactDockPopout = document.getElementById("contactDockPopout");
 const contactDockPopoutInner = document.getElementById("contactDockPopoutInner");
 
 function contactNavigateWithSlide(url, direction = "left") {
+  if (mobilePerformanceMode) {
+    window.location.href = url;
+    return;
+  }
+
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
   document.body.classList.add(
     direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageHeight = document.querySelector(".poppi-page").scrollHeight;
   symbolLayer.style.height = `${pageHeight}px`;
 
-  const symbolCount = window.innerWidth < 768 ? 12 : 20;
+  const symbolCount = mobilePerformanceMode ? 4 : window.innerWidth < 768 ? 6 : 20;
 
   for (let i = 0; i < symbolCount; i++) {
     const symbol = document.createElement("img");
@@ -176,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startLeft = Math.random() * 100;
     const startOffset = Math.random() * pageHeight * 0.9;
-    const duration = 18 + Math.random() * 14;
+    const duration = mobilePerformanceMode ? 24 + Math.random() * 10 : 18 + Math.random() * 14;
     const delay = Math.random() * -25;
-    const size = 0.65 + Math.random() * 0.7;
-    const opacity = 0.08 + Math.random() * 0.08;
+    const size = mobilePerformanceMode ? 0.54 + Math.random() * 0.32 : 0.65 + Math.random() * 0.7;
+    const opacity = mobilePerformanceMode ? 0.04 + Math.random() * 0.04 : 0.08 + Math.random() * 0.08;
 
     symbol.style.left = `${startLeft}%`;
     symbol.style.top = `${-140 + startOffset}px`;

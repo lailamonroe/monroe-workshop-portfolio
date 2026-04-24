@@ -2,6 +2,7 @@ const contactSocialBtn = document.getElementById("contactSocialBtn");
 const contactNotebookBtn = document.getElementById("contactNotebookBtn");
 const contactPrevPageBtn = document.getElementById("contactPrevPageBtn");
 const RETURN_TO_DESK_KEY = "return-to-home-desk";
+const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
 const contactDockPopout = document.getElementById("contactDockPopout");
 const contactDockPopoutInner = document.getElementById("contactDockPopoutInner");
@@ -9,6 +10,11 @@ const contactDockPopoutInner = document.getElementById("contactDockPopoutInner")
 function contactNavigateWithSlide(url, direction = "left") {
   if (url === "index.html") {
     sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  }
+
+  if (isTouchDevice) {
+    window.location.href = url;
+    return;
   }
 
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");

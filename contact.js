@@ -1,11 +1,16 @@
 const contactSocialBtn = document.getElementById("contactSocialBtn");
 const contactNotebookBtn = document.getElementById("contactNotebookBtn");
 const contactPrevPageBtn = document.getElementById("contactPrevPageBtn");
+const RETURN_TO_DESK_KEY = "return-to-home-desk";
 
 const contactDockPopout = document.getElementById("contactDockPopout");
 const contactDockPopoutInner = document.getElementById("contactDockPopoutInner");
 
 function contactNavigateWithSlide(url, direction = "left") {
+  if (url === "index.html") {
+    sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  }
+
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
   document.body.classList.add(
     direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -15,6 +20,12 @@ function contactNavigateWithSlide(url, direction = "left") {
     window.location.href = url;
   }, 350);
 }
+
+document.querySelectorAll('a[href="index.html"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  });
+});
 
 function closeContactDockPopout() {
   contactDockPopout.classList.remove("active");

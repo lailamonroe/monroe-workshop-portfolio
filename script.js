@@ -26,6 +26,7 @@ const fullText = "welcome to my portfolio :)";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const mobileQuery = window.matchMedia("(max-width: 760px)");
 const tabletQuery = window.matchMedia("(max-width: 1024px)");
+const RETURN_TO_DESK_KEY = "return-to-home-desk";
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -104,6 +105,30 @@ function navigateWithSlide(url, direction = "left") {
   setTimeout(() => {
     window.location.href = url;
   }, 350);
+}
+
+function consumeReturnToDeskFlag() {
+  const shouldReturnToDesk = sessionStorage.getItem(RETURN_TO_DESK_KEY) === "true";
+
+  if (shouldReturnToDesk) {
+    sessionStorage.removeItem(RETURN_TO_DESK_KEY);
+  }
+
+  return shouldReturnToDesk;
+}
+
+function jumpToDeskScene() {
+  if (!sequence) return;
+
+  const config = getSequenceConfig();
+  const sequenceTop = sequence.offsetTop;
+  const total = Math.max(sequence.offsetHeight - window.innerHeight, 1);
+  const deskProgress = clamp(config.deskInEnd + 0.2, 0, 0.98);
+  const targetTop = sequenceTop + total * deskProgress;
+
+  window.scrollTo(0, targetTop);
+  updateSequence();
+  updateHeaderVisibility();
 }
 
 function closeDockPopout() {
@@ -291,3 +316,15 @@ window.addEventListener("load", updateHeaderVisibility);
 
 updateSequence();
 updateHeaderVisibility();
+
+if (consumeReturnToDeskFlag()) {
+  window.addEventListener(
+    "load",
+    () => {
+      requestAnimationFrame(() => {
+        jumpToDeskScene();
+      });
+    },
+    { once: true }
+  );
+}

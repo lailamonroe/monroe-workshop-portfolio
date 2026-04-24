@@ -21,6 +21,14 @@ function pinProjectHeader() {
   window.addEventListener("resize", applyPinnedStyles);
 }
 
+const RETURN_TO_DESK_KEY = "return-to-home-desk";
+
+document.querySelectorAll('a[href="../index.html"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  });
+});
+
 document.addEventListener("DOMContentLoaded", pinProjectHeader);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -95,6 +103,10 @@ function openContactSocialPopout() {
       </a>
       <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
         <img src="assets/logo2.png" alt="LinkedIn" />
+      </a>
+      </a>
+       <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+        <img src="assets/logo3.png" alt="Github" />
       </a>
     </div>
   `;

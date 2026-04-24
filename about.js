@@ -13,6 +13,7 @@ const aboutPanelTitle = document.getElementById("aboutPanelTitle");
 const aboutPanelText = document.getElementById("aboutPanelText");
 
 const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const RETURN_TO_DESK_KEY = "return-to-home-desk";
 
 const defaultPanel = {
   label: "ABOUT",
@@ -21,6 +22,10 @@ const defaultPanel = {
 };
 
 function navigateWithSlide(url, direction = "left") {
+  if (url === "index.html") {
+    sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  }
+
   document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
   document.body.classList.add(
     direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -78,6 +83,23 @@ function resetAboutPanel() {
   setAboutPanel(defaultPanel.label, defaultPanel.title, defaultPanel.text);
 }
 
+document.querySelectorAll('a[href="index.html"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+  });
+});
+
+function revealAboutPanelOnMobile() {
+  if (!isTouchDevice || !aboutPanelTitle) return;
+
+  requestAnimationFrame(() => {
+    aboutPanelTitle.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  });
+}
+
 frameHotspots.forEach((hotspot) => {
   const updatePanel = () => {
     setAboutPanel(
@@ -94,6 +116,7 @@ frameHotspots.forEach((hotspot) => {
     hotspot.addEventListener("click", (event) => {
       event.preventDefault();
       updatePanel();
+      revealAboutPanelOnMobile();
     });
   }
 

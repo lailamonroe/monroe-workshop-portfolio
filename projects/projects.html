@@ -140,8 +140,13 @@
   const projectsNextPageBtn = document.getElementById("projectsNextPageBtn");
   const projectsDockPopout = document.getElementById("projectsDockPopout");
   const projectsDockPopoutInner = document.getElementById("projectsDockPopoutInner");
+  const RETURN_TO_DESK_KEY = "return-to-home-desk";
 
   function projectsNavigateWithSlide(url, direction = "left") {
+    if (url === "../index.html") {
+      sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+    }
+
     document.body.classList.remove("page-slide-out-left", "page-slide-out-right");
     document.body.classList.add(
       direction === "left" ? "page-slide-out-left" : "page-slide-out-right"
@@ -151,6 +156,12 @@
       window.location.href = url;
     }, 350);
   }
+
+  document.querySelectorAll('a[href="../index.html"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      sessionStorage.setItem(RETURN_TO_DESK_KEY, "true");
+    });
+  });
 
   function closeProjectsDockPopout() {
     projectsDockPopout.classList.remove("active");
@@ -166,6 +177,10 @@
         <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
           <img src="../assets/logo2.png" alt="LinkedIn" />
         </a>
+        </a>
+       <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
+        <img src="../assets/logo3.png" alt="Github" />
+      </a>
       </div>
     `;
     projectsDockPopout.classList.add("active");
@@ -174,11 +189,10 @@
   function openProjectsNotebookPopout() {
     projectsDockPopoutInner.innerHTML = `
       <div class="popout-note">
-        <div class="popout-note-label">MEDIA</div>
-        <div class="popout-note-title">More from this archive</div>
+        <div class="popout-note-label">Brain Break</div>
+        <div class="popout-note-title">Thoughts and Quotes</div>
         <div class="popout-note-text">
-          Additional design work spanning web, print, branding, and strategy-focused creative.
-        </div>
+“The future belongs to those who believe in the beauty of their dreams.” — Eleanor Roosevelt        </div>
       </div>
     `;
     projectsDockPopout.classList.add("active");

@@ -127,8 +127,7 @@ function jumpToDeskScene() {
   const targetTop = sequenceTop + total * deskProgress;
 
   window.scrollTo(0, targetTop);
-  updateSequence();
-  updateHeaderVisibility();
+  renderHomeSequence();
 }
 
 function closeDockPopout() {
@@ -184,15 +183,25 @@ if (!prefersReducedMotion && cycleLogos.length > 0) {
   });
 }
 
-function updateSequence() {
-  if (!sequence || !bgDark || !bgLight || !phaseLogo || !phaseStars || !phaseDesk || !sceneTrack) {
-    return;
-  }
+function getSequenceMetrics() {
+  if (!sequence) return null;
 
   const config = getSequenceConfig();
   const rect = sequence.getBoundingClientRect();
   const total = Math.max(rect.height - window.innerHeight, 1);
   const progress = clamp(-rect.top / total, 0, 1);
+
+  return { config, progress };
+}
+
+function updateSequence(metrics = getSequenceMetrics()) {
+  if (!sequence || !bgDark || !bgLight || !phaseLogo || !phaseStars || !phaseDesk || !sceneTrack) {
+    return;
+  }
+
+  if (!metrics) return;
+
+  const { config, progress } = metrics;
 
   const lightReveal = mapProgress(progress, config.lightStart, config.lightEnd);
   bgLight.style.opacity = lightReveal;
@@ -234,18 +243,31 @@ function updateSequence() {
   sceneTrack.style.transform = `translate(-50%, -50%) scale(${deskScale})`;
 }
 
-function updateHeaderVisibility() {
-  if (!sequence) {
-    return;
-  }
+function updateHeaderVisibility(metrics = getSequenceMetrics()) {
+  if (!sequence || !metrics) return;
 
-  const config = getSequenceConfig();
-  const rect = sequence.getBoundingClientRect();
-  const total = Math.max(rect.height - window.innerHeight, 1);
-  const progress = clamp(-rect.top / total, 0, 1);
+  const { config, progress } = metrics;
   const deskIn = mapProgress(progress, config.deskInStart, config.deskInEnd);
 
   document.body.classList.toggle("show-header", deskIn > 0.02);
+}
+
+let homeSequenceFrame = null;
+
+function renderHomeSequence() {
+  homeSequenceFrame = null;
+
+  const metrics = getSequenceMetrics();
+  if (!metrics) return;
+
+  updateSequence(metrics);
+  updateHeaderVisibility(metrics);
+}
+
+function scheduleHomeSequenceUpdate() {
+  if (homeSequenceFrame !== null) return;
+
+  homeSequenceFrame = window.requestAnimationFrame(renderHomeSequence);
 }
 
 desktopFolders.forEach((folder) => {
@@ -307,15 +329,11 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("scroll", updateSequence, { passive: true });
-window.addEventListener("scroll", updateHeaderVisibility, { passive: true });
-window.addEventListener("resize", updateSequence);
-window.addEventListener("resize", updateHeaderVisibility);
-window.addEventListener("load", updateSequence);
-window.addEventListener("load", updateHeaderVisibility);
+window.addEventListener("scroll", scheduleHomeSequenceUpdate, { passive: true });
+window.addEventListener("resize", scheduleHomeSequenceUpdate);
+window.addEventListener("load", scheduleHomeSequenceUpdate);
 
-updateSequence();
-updateHeaderVisibility();
+renderHomeSequence();
 
 if (consumeReturnToDeskFlag()) {
   window.addEventListener(

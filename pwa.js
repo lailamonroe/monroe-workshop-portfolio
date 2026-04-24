@@ -1,15 +1,3 @@
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", async () => {
-    try {
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map((registration) => registration.unregister()));
-
-      if ("caches" in window) {
-        const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
-      }
-    } catch (error) {
-      console.error("Service worker cleanup failed:", error);
-    }
-  });
-}
+// Intentionally left lightweight.
+// A previous version cleared service workers and caches on every load,
+// which undermined browser caching and slowed repeat visits.

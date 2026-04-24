@@ -1071,6 +1071,8 @@ body.show-header .bottom-dock-wrap {
   width: min(100%, var(--project-max-width));
   margin: 0 auto;
   padding: 5rem 2rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .project-page .narrow {
@@ -1128,6 +1130,12 @@ body.show-header .bottom-dock-wrap {
   align-items: flex-end;
   padding: calc(3rem + var(--page-header-gap)) 2rem 3rem;
   overflow: hidden;
+}
+
+.project-hero,
+.project-page .back-link {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
 }
 
 .project-hero-bg {

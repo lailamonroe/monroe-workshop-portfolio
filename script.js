@@ -182,18 +182,42 @@ let logoIndex = 0;
 let lastTypedCount = -1;
 let mobileSceneTransformSet = false;
 
-if (!prefersReducedMotion && cycleLogos.length > 0) {
+function startLogoPreview() {
+  if (cycleLogos.length === 0) return;
+
+  cycleLogos.forEach((logo, index) => {
+    logo.classList.toggle("active", index === 0);
+  });
+
+  if (prefersReducedMotion || cycleLogos.length < 2) return;
+
   setInterval(() => {
     cycleLogos.forEach((logo, index) => {
       logo.classList.toggle("active", index === logoIndex);
     });
     logoIndex = (logoIndex + 1) % cycleLogos.length;
   }, mobilePerformanceMode ? 720 : tabletQuery.matches ? 560 : 420);
-} else {
-  cycleLogos.forEach((logo, index) => {
-    logo.classList.toggle("active", index === 0);
-  });
 }
+
+function primeLogoPreview() {
+  if (cycleLogos.length === 0) return;
+
+  const preload = cycleLogos.map((logo) => {
+    if (logo.complete) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      logo.addEventListener("load", resolve, { once: true });
+      logo.addEventListener("error", resolve, { once: true });
+    });
+  });
+
+  Promise.race([
+    Promise.all(preload),
+    new Promise((resolve) => setTimeout(resolve, 900))
+  ]).then(startLogoPreview);
+}
+
+primeLogoPreview();
 
 if (mobilePerformanceMode) {
   stars.forEach((star) => {

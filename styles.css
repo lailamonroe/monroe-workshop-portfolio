@@ -4430,58 +4430,62 @@ body.npca-page {
 
 /* mobile */
 @media (max-width: 760px) {
+  .blendedbond-symbol-layer .blendedbond-symbol {
+    opacity: 0.08;
+  }
+
   .symbol-1 {
-    width: 94px !important;
-    top: 9%;
-    left: -4%;
+    width: 78px !important;
+    top: 6%;
+    left: -5%;
   }
 
   .symbol-2 {
-    width: 80px !important;
-    top: 15%;
-    right: -2%;
-  }
-
-  .symbol-3 {
-    width: 108px !important;
-    top: 31%;
-    left: -6%;
-  }
-
-  .symbol-4 {
-    width: 72px !important;
-    top: 37%;
+    width: 70px !important;
+    top: 17%;
     right: -4%;
   }
 
+  .symbol-3 {
+    width: 88px !important;
+    top: 30%;
+    left: -7%;
+  }
+
+  .symbol-4 {
+    width: 66px !important;
+    top: 41%;
+    right: -5%;
+  }
+
   .symbol-5 {
-    width: 96px !important;
-    top: 55%;
-    left: -2%;
+    width: 82px !important;
+    top: 53%;
+    left: -6%;
   }
 
   .symbol-6 {
-    width: 64px !important;
-    top: 54%;
-    right: 11%;
+    width: 58px !important;
+    top: 63%;
+    right: 7%;
   }
 
   .symbol-7 {
-    width: 72px !important;
-    top: 71%;
-    left: -2%;
+    width: 66px !important;
+    top: 73%;
+    left: -5%;
   }
 
   .symbol-8 {
-    width: 62px !important;
-    top: 79%;
-    right: 3%;
+    width: 58px !important;
+    top: 82%;
+    right: -3%;
   }
 
   .symbol-9 {
-    width: 86px !important;
-    top: 88%;
-    left: 10%;
+    width: 72px !important;
+    top: 92%;
+    left: 18%;
   }
 }
 
@@ -4880,5 +4884,82 @@ body.npca-page {
 
   .gallery-bus-stop img {
     object-position: 32% center !important;
+  }
+}
+
+/* Final mobile stability pass */
+@media (max-width: 760px) {
+  body.home-page .logo-cycle-wrap {
+    width: min(76vw, 340px);
+    min-height: 150px;
+  }
+
+  body.home-page .cycle-logo {
+    filter: none;
+  }
+
+  body.home-page .sequence-sticky {
+    min-height: 100svh;
+  }
+
+  body.home-page .scene-track {
+    width: min(104vw, 400px) !important;
+    top: 50% !important;
+  }
+
+  body.home-page .monitor-desktop {
+    top: 66% !important;
+    width: 38% !important;
+    height: 27% !important;
+  }
+
+  body.home-page .desktop-folder {
+    min-width: 34px;
+  }
+
+  body.home-page .folder-icon {
+    max-width: 34px !important;
+  }
+
+  body.home-page .desktop-folder span {
+    font-size: 0.5rem !important;
+    line-height: 1.05;
+  }
+
+  .project-hero .hero-content,
+  .poppi-hero .hero-content,
+  .city-hero .hero-content,
+  .smithsonian-hero .hero-content,
+  .blendedbond-hero .hero-content,
+  .city-hero-content,
+  .blendedbond-hero-content {
+    max-width: min(100%, 24rem) !important;
+  }
+
+  .city-hero .hero-content,
+  .smithsonian-hero .hero-content,
+  .city-hero-content {
+    width: min(100%, 24rem) !important;
+  }
+
+  .bottom-dock-wrap {
+    z-index: 3200;
+  }
+}
+
+@media (max-width: 420px) {
+  body.home-page .logo-cycle-wrap {
+    width: min(82vw, 300px);
+    min-height: 130px;
+  }
+
+  body.home-page .scene-track {
+    width: 106vw !important;
+    top: 51% !important;
+  }
+
+  body.home-page .monitor-desktop {
+    top: 66% !important;
+    width: 39% !important;
   }
 }

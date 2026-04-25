@@ -17,7 +17,7 @@ const RETURN_TO_DESK_KEY = "return-to-home-desk";
 
 const defaultPanel = {
   label: "ABOUT",
-  title: "Tap/Hover over a picture to learn more!",
+  title: "Who is Laila?",
   text: "Ask me about travel, Studio Ghibli movies, my current favorite Food Network show, my family, my favorite song/artist at the moment, and Women’s basketball!"
 };
 

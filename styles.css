@@ -241,7 +241,7 @@ body.home-page.show-header .site-header {
 }
 
 body.mobile-performance-mode .scroll-sequence {
-  height: 300vh;
+  height: 260vh;
 }
 
 body.mobile-performance-mode .bg-dark {
@@ -259,12 +259,22 @@ body.mobile-performance-mode .scene-track {
   will-change: auto;
 }
 
+body.mobile-performance-mode .bg-layer {
+  transition: none;
+}
+
+body.mobile-performance-mode .phase-logo,
+body.mobile-performance-mode .scene-track {
+  transform: none;
+}
+
 body.mobile-performance-mode .intro-scroll-prompt {
   backdrop-filter: none;
 }
 
 body.mobile-performance-mode .intro-scroll-prompt-star,
-body.mobile-performance-mode .folder-icon {
+body.mobile-performance-mode .folder-icon,
+body.mobile-performance-mode .scene-image {
   filter: none;
 }
 

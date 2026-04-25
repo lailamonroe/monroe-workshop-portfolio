@@ -42,14 +42,14 @@ function openContactSocialPopout() {
   contactDockPopoutInner.innerHTML = `
     <div class="popout-socials">
       <a href="https://instagram.com/artxxlai" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="Instagram">
-        <img src="assets/logo1.png" alt="Instagram" />
+        <img src="assets/logo1.png?v=20260425" alt="Instagram" />
       </a>
       <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
-        <img src="assets/logo2.png" alt="LinkedIn" />
+        <img src="assets/logo2.png?v=20260425" alt="LinkedIn" />
       </a>
       </a>
        <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
-        <img src="assets/logo3.png" alt="Github" />
+        <img src="assets/logo3.png?v=20260425" alt="Github" />
       </a>
     </div>
   `;

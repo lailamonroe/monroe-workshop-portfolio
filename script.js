@@ -29,6 +29,7 @@ const tabletQuery = window.matchMedia("(max-width: 1024px)");
 const touchQuery = window.matchMedia("(hover: none), (pointer: coarse)");
 const RETURN_TO_DESK_KEY = "return-to-home-desk";
 const mobilePerformanceMode = prefersReducedMotion || mobileQuery.matches || touchQuery.matches;
+const mobileProgressStep = 0.012;
 
 document.body.classList.toggle("mobile-performance-mode", mobilePerformanceMode);
 
@@ -150,13 +151,13 @@ function openSocialPopout() {
   dockPopoutInner.innerHTML = `
     <div class="popout-socials">
       <a href="https://instagram.com/artxxlai" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="Instagram">
-        <img src="assets/logo1.png" alt="Instagram" />
+        <img src="assets/logo1.png?v=20260425" alt="Instagram" />
       </a>
       <a href="https://www.linkedin.com/in/lailamonroe/" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
-        <img src="assets/logo2.png" alt="LinkedIn" />
+        <img src="assets/logo2.png?v=20260425" alt="LinkedIn" />
       </a>
        <a href="https://github.com/lailamonroe" target="_blank" rel="noopener noreferrer" class="popout-social-link" aria-label="LinkedIn">
-        <img src="assets/logo3.png" alt="Github" />
+        <img src="assets/logo3.png?v=20260425" alt="Github" />
       </a>
     </div>
   `;
@@ -178,6 +179,8 @@ function openNotebookPopout() {
 }
 
 let logoIndex = 0;
+let lastTypedCount = -1;
+let mobileSceneTransformSet = false;
 
 if (!prefersReducedMotion && cycleLogos.length > 0) {
   setInterval(() => {
@@ -225,7 +228,7 @@ function updateSequence(metrics = getSequenceMetrics()) {
   const logoFade = 1 - mapProgress(progress, config.logoFadeStart, config.logoFadeEnd);
   const logoScale = 1 - mapProgress(progress, 0, config.logoFadeEnd) * 0.08;
   phaseLogo.style.opacity = logoFade;
-  phaseLogo.style.transform = `scale(${logoScale})`;
+  phaseLogo.style.transform = mobilePerformanceMode ? "none" : `scale(${logoScale})`;
 
   const starsIn = mapProgress(progress, config.starsInStart, config.starsInEnd);
   const starsOut = 1 - mapProgress(progress, config.starsOutStart, config.starsOutEnd);
@@ -254,14 +257,25 @@ function updateSequence(metrics = getSequenceMetrics()) {
 
   const typingProgress = mapProgress(progress, config.typingStart, config.typingEnd);
   const charCount = Math.floor(fullText.length * typingProgress);
-  typedText.textContent = fullText.slice(0, charCount);
+  if (charCount !== lastTypedCount) {
+    typedText.textContent = fullText.slice(0, charCount);
+    lastTypedCount = charCount;
+  }
 
   const deskIn = mapProgress(progress, config.deskInStart, config.deskInEnd);
   phaseDesk.style.opacity = deskIn;
 
   const deskScale = config.deskScaleStart + deskIn * (config.deskScaleEnd - config.deskScaleStart);
   sceneTrack.style.opacity = deskIn;
-  sceneTrack.style.transform = `translate(-50%, -50%) scale(${deskScale})`;
+
+  if (mobilePerformanceMode) {
+    if (!mobileSceneTransformSet) {
+      sceneTrack.style.transform = "translate(-50%, -50%) scale(1)";
+      mobileSceneTransformSet = true;
+    }
+  } else {
+    sceneTrack.style.transform = `translate(-50%, -50%) scale(${deskScale})`;
+  }
 }
 
 function updateHeaderVisibility(metrics = getSequenceMetrics()) {
@@ -282,8 +296,12 @@ function renderHomeSequence() {
   const metrics = getSequenceMetrics();
   if (!metrics) return;
 
-  if (mobilePerformanceMode && Math.abs(metrics.progress - lastRenderedProgress) < 0.004) {
-    return;
+  if (mobilePerformanceMode) {
+    metrics.progress = Math.round(metrics.progress / mobileProgressStep) * mobileProgressStep;
+
+    if (metrics.progress === lastRenderedProgress) {
+      return;
+    }
   }
 
   lastRenderedProgress = metrics.progress;
